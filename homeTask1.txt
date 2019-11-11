@@ -24,8 +24,8 @@ Xpath=//*[@class='search-result__item-name' and contains(text(),'Automation ')]
 Task5
 Завдання:
 Перейдіть за посиланням: https://www.epam.com/about/who-we-are/events . Натисніть “PAST EVENTS”.  Знайдіть усі кнопки “LEARN MORE” (<a...>) для подій які відбулись в листопаді. 
-Xpath=//*[@class='button-ui bg-color-light-blue']
-Xpath = //*[@class='events-viewer__date' and contains(.,'NOVEMBER')]//following::a[@class='button-ui bg-color-light-blue']
+Xpath=//time[contains(.,'NOVEMBER')]//following-sibling::div[@class='events-viewer__button-wrapper']//descendant::span[contains (@class, 'button__content') and contains(text(), 'Learn more')] 
+
 ************************************************************************************************************************************************************************************  
 
 Part2
