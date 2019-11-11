@@ -8,7 +8,7 @@ css = .top-navigation__item-link
 Task2
 Завдання:
 Перейдіть: https://www.training.by/. З ‘training list’ оберіть локацію ‘Belarus, Minsk’ Знайдіть зображення усіх календарів навпроти яких кількість тижнів містить цифру 1. 
-Xpath=//*[@class='ng-binding' and contains (., '1')]//ancestor::div[@class='duration-weeks ng-binding']//preceding-sibling::div[contains(@class, 'duration-calendar ng-binding')]
+Xpath=//*[@class='training-list__container training-list__desktop']//descendant::div[contains(@class, 'duration-calendar ng-binding')]//following-sibling::div[@class='duration-weeks ng-binding'and contains (., '1')]
 
 Task3
 Завдання:
