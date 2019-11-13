@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 public class NewsPage {
     @Test()
-    public void verifyNewsSection() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Webdriver\\chromedriver.exe"); //DOWNLOAD DRIVER !
+    public void verifyNewsSection() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "C:\\Webdriver\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(driver, 20);
         driver.manage().window().maximize();
@@ -33,10 +33,13 @@ public class NewsPage {
 
         WebElement openNewsPage = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(@class, \"main-nav__list\")]//li//descendant::a[contains(@class, \"topNavItem news click hover\")]")));
         openNewsPage.click();
+        Thread.sleep(1000);
 
-        WebElement openMaterials = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='tab-nav__item ng-scope']//descendant::span[@class='ng-binding' and contains(text(),'Materials')]")));
+        WebElement openMaterials = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='tab-nav__item ng-scope']//descendant::span[@class='ng-binding' and contains(text(),'Матеріали')]")));
         openMaterials.click();
-//        driver.quit();
+        Thread.sleep(1000);
+
+        driver.quit();
 
     }
 }
