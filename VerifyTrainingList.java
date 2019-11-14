@@ -8,9 +8,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class VerifyTrainingList {
+public class TrainingListByLocationsVerification {
     @Test()
     public void VerifyTrainingList() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "C:\\Webdriver\\chromedriver.exe");
@@ -39,25 +40,27 @@ public class VerifyTrainingList {
         expandLocations.click();
         Thread.sleep(1000);
 
-       // WebElement locationSearchInput = driver.findElement(By.xpath("//div[contains(.,'Ukraine') and contains(@class, 'location__not-active-label')]"));
-           //  locationSearchInput.click();
 
-        WebElement locationSearchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(.,'Україна') and contains(@class, 'location__not-active-label')]")));
-       locationSearchInput.click();
+        WebElement locationSearchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(.,'Ukraine') and contains(@class, 'location__not-active-label')]")));
+        locationSearchInput.click();
         Thread.sleep(1000);
 
         WebElement locationCheckbox = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//label[contains(.,'Львів')]//span")));
+                By.xpath("//label[contains(.,'Lviv')]//span")));
         locationCheckbox.click();
-
+        Thread.sleep(1000);
 
         WebElement collapseSkillsArrow = driver.findElement(By.xpath("//div[@class='filter-toggle__arrow-icon arrow-icon-rotate']"));
         collapseSkillsArrow.click();
+        Thread.sleep(1000);
 
-//        List<WebElement> newsPageResultsList = driver.findElements(By.xpath("//div[@class='training-list__container training-list__desktop']//a"));
-//        newsPageResultsList.forEach(element-> Assert.assertTrue(element.getText().contains("Lviv"))) ;
-//             //   String.format("Element %s does not contain 'Lviv' word.",element)));
+
+        List<WebElement> locationsSearchResultsList = driver.
+                findElements(By.xpath("//div[@class='training-list__container training-list__desktop']//div[@class='training-item__location ng-binding']"));
+        locationsSearchResultsList.forEach(element -> org.testng.Assert.assertTrue(element.getText().contains("Lviv"),
+                String.format("Element %s does not contain 'Lviv' word.", element)));
         driver.quit();
+
 
     }
 }
