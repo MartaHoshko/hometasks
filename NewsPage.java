@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class NewsPage {
@@ -20,6 +21,7 @@ public class NewsPage {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://training.by/#/Home");
+        driver.manage().deleteAllCookies();
 
         WebElement signInButton = driver.findElement(By.xpath("//p[@class='header-auth__signin']//span"));
         signInButton.click();
@@ -35,11 +37,19 @@ public class NewsPage {
         openNewsPage.click();
         Thread.sleep(1000);
 
-        WebElement openMaterials = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='tab-nav__item ng-scope']//descendant::span[@class='ng-binding' and contains(text(),'Матеріали')]")));
+        WebElement openMaterials = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='tab-nav__item ng-scope']//descendant::span[@class='ng-binding' and contains(text(),'Materials')]")));
         openMaterials.click();
         Thread.sleep(1000);
 
+        List<WebElement> materialsSearchResultsList = driver.
+                findElements(By.xpath("//div[@class='news-page-list__container']//a"));
+        materialsSearchResultsList.forEach(element -> org.testng.Assert.assertTrue(element.getText().contains("Materials")
+                        || element.getText().contains("Useful")
+                        || element.getText().contains("useful")
+                        || element.getText().contains("materials"),
+                String.format("Element %s does not contain 'Materials' or 'Useful' word.", element)));
         driver.quit();
+
 
     }
 }
